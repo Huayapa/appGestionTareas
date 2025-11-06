@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 
 class Task extends Model
 {
-    protected $table = 'tasks';
+    protected $connection = 'mongodb';
+    protected $collection = 'tasks';
     protected $fillable = [
         'title',
         'description',
@@ -17,6 +18,6 @@ class Task extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_assigned', 'id');
+        return $this->belongsTo(User::class, 'user_assigned', '_id');
     }
 }
