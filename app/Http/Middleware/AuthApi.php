@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthApi
@@ -27,7 +28,7 @@ class AuthApi
                 throw new \Exception('Token inválido');
             }
 
-            $request->merge(['user' => $user]);
+             Auth::setUser($user);
             return $next($request);
         } catch (\Exception $e) {
             return apiResponse([
