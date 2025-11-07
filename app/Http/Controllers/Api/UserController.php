@@ -39,6 +39,7 @@ class UserController extends Controller
             'password' => 'required|string|min:4',
         ]);
         $validatedData['password'] = Hash::make($validatedData['password']);
+        $validatedData['auth_provider'] = 'standard';
 
         $user = User::create($validatedData);
 
