@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Middleware\AuthApi;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Routing\Middleware\SubstituteBindings;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -12,12 +14,18 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->group('api', [
+            SubstituteBindings::class,
+        ]);
+        $middleware->alias([
+            'auth.api' => AuthApi::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (Throwable $e, $request) {
             if ($request->is('api/*')) {
                 return apiResponse([
+                    'status' => 'error',
                     'message' => 'Ocurrió un error al procesar la solicitud',
                     'data' => [],
                     'error' => $e->getMessage(),

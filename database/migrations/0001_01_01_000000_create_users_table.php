@@ -17,6 +17,7 @@ return new class extends Migration
             $collection->string('email')->unique();
             $collection->timestamp('email_verified_at')->nullable();
             $collection->string('password');
+            $collection->string('api_token');
             $collection->enum('auth_provider', ['standard', 'google', 'github'])->default('standard');
             $collection->rememberToken();
             $collection->timestamps();
