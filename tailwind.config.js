@@ -12,8 +12,17 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Onest', ...defaultTheme.fontFamily.sans],
             },
+
+            colors:{
+                primary: 'var(--color-primary)',
+                secondary: 'var(--color-secondary)',
+                tertiary: 'var(--color-tertiary)',
+                dark: 'var(--color-dark)',
+                'dark-30': 'var(--color-dark-30)',
+                light: 'var(--color-light)',
+            }
         },
     },
 

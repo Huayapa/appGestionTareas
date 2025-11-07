@@ -1,3 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Variables personalizadas */
+@layer base {
+  :root {
+    --color-primary: #42C83C;
+    --color-secondary: #1C1B1B;
+    --color-tertiary: #343434;
+    --color-dark: #0D0C0C;
+    --color-dark-30: #0D0C0C30;
+    --color-light: #F5F5F5;
+  }
+}
+
+.radial-login-bg {
+  background: radial-gradient(circle at center,
+      var(--color-tertiary),
+      var(--color-secondary) 30%,
+      var(--color-dark) 80%);
+}
+
+.animate-beat-slow {
+  animation: beat-slow 10s infinite ease;
+}
+.animate-beat {
+  animation: beat 7s infinite linear;
+}
+.animate-beat-reverse {
+  animation: beat-reverse 7s infinite linear;
+}
+
+@keyframes beat-slow {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+@keyframes beat {
+  0%, 100% {
+    transform: scale(.5);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+}
+@keyframes beat-reverse {
+  0%, 100% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(.5);
+  }
+}
