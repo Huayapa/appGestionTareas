@@ -4,13 +4,13 @@
 
     <div class="flex justify-center items-center w-full lg:gap-24">
         <div class="flex flex-col p-5 py-10 md:py-5 max-w-[430px] w-full">
-            <h1 class="text-3xl font-bold text-center sm:text-right">Crear una cuenta</h1>
+            <h1 class="text-3xl font-bold text-center sm:text-left">Crear una cuenta</h1>
 
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
                 <!-- Name -->
-                <div>
+                <div class="mt-6">
                     <x-input-label for="name" :value="__('Name')" />
                     <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')"
                         required autofocus autocomplete="name" />
@@ -45,13 +45,13 @@
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>
 
-                <div class="flex items-center justify-end mt-4">
-                    <a class="underline text-light opacity-70 hover:opacity-100 active:text-primary transition"
+                <div class="flex flex-col items-start justify-end mt-4 gap-4">
+                    <a class="underline text-light opacity-70 hover:opacity-100 active:text-primary transition text-sm"
                         href="{{ route('login') }}">
                         ¿Ya tienes una cuenta?
                     </a>
 
-                    <x-primary-button class="ms-4">
+                    <x-primary-button class="w-full h-[60px] rounded-2xl">
                         Registrarse
                     </x-primary-button>
                 </div>
