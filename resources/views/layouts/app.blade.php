@@ -18,12 +18,12 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen layout-wrapper p-3 bg-secondary text-light gap-8">
+    <div class="min-h-screen layout-wrapper bg-secondary text-light gap-8 p-3 pb-20 sm:pb-3">
         @include('layouts.navigation')
 
 
         <!-- Page Content -->
-        <main class="max-w-[1920px] py-2 pe-5 ps-0">
+        <main class="max-w-[1920px] py-2 sm:pe-5 ps-0">
             {{ $slot }}
         </main>
 

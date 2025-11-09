@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <div class="sticky top-5 bg-secondary z-10">
+    <div class="">
         {{-- Top Nav --}}
         <div class="flex justify-end mb-12">
             <x-dropdown>
@@ -9,16 +9,16 @@
                         {{ collect(explode(' ', Auth::user()->name))->take(2)->map(fn($word) => strtoupper($word[0]))->implode('') }}
                     </button>
                 </x-slot>
-    
+
                 <x-slot name="content">
                     <x-dropdown-link :href="route('profile.edit')">
                         Perfil
                     </x-dropdown-link>
-    
+
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-    
+
                         <x-dropdown-link :href="route('logout')"
                             onclick="event.preventDefault();
                                                     this.closest('form').submit();">
@@ -28,11 +28,11 @@
                 </x-slot>
             </x-dropdown>
         </div>
-    
+
         {{-- Header --}}
         <div class="flex items-center justify-between pb-4 mb-4">
             <h1 class="text-3xl">Tareas</h1>
-    
+
             <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-new-task')">
                 Añadir Tarea
             </x-primary-button>
@@ -40,11 +40,25 @@
     </div>
 
     {{-- Content --}}
-    <div class="grid grid-cols-3 gap-4" x-data="{ selected: null }">
-        <div class="flex flex-col py-5 px-4 border-2 border-dashed rounded-xl card__pending">
-            <span class="w-fit bg-red-600 px-2 py-1 rounded-lg mb-6">Pendiente</span>
+    <div class="grid lg:grid-cols-3 gap-4" x-data="{ selected: null }">
+        <div x-data="{ open: window.innerWidth > 1024 }" class="flex flex-col border-2 border-dashed rounded-xl card__pending" x-transition>
+            <div @click="if(window.innerWidth < 1024) open = !open" class="flex items-center justify-between py-5 px-4 cursor-pointer lg:cursor-default">
+                <span class="w-fit bg-red-600 px-2 py-1 rounded-lg ">Pendiente</span>
 
-            <div class="flex flex-col gap-3">
+                <svg :class="{'rotate-180' : open }" class="flex lg:hidden transition" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M17.9188 8.17969H11.6888H6.07877C5.11877 8.17969 4.63877 9.33969 5.31877 10.0197L10.4988 15.1997C11.3288 16.0297 12.6788 16.0297 13.5088 15.1997L15.4788 13.2297L18.6888 10.0197C19.3588 9.33969 18.8788 8.17969 17.9188 8.17969Z"
+                        fill="#fff" />
+                </svg>
+            </div>
+
+            <div x-show="open" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform -translate-y-2"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-2" class="flex flex-col gap-3 pb-5 px-4">
                 @isset($tasks['pendiente'])
                     @foreach ($tasks['pendiente'] as $task)
                         <x-task-card :task="$task" />
@@ -53,10 +67,24 @@
             </div>
         </div>
 
-        <div class="flex flex-col py-5 px-4 border-2 border-dashed rounded-xl card__inprogress">
-            <span class="w-fit bg-yellow-600 px-2 py-1 rounded-lg mb-6">En Progreso</span>
+        <div x-data="{ open: window.innerWidth > 1024 }" class="flex flex-col border-2 border-dashed rounded-xl card__inprogress">
+            <div @click="if(window.innerWidth < 1024) open = !open" class="flex items-center justify-between py-5 px-4 cursor-pointer lg:cursor-default">
+                <span class="w-fit bg-yellow-600 px-2 py-1 rounded-lg">En Progreso</span>
 
-            <div class="flex flex-col gap-3">
+                <svg :class="{'rotate-180' : open }" class="flex lg:hidden transition" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M17.9188 8.17969H11.6888H6.07877C5.11877 8.17969 4.63877 9.33969 5.31877 10.0197L10.4988 15.1997C11.3288 16.0297 12.6788 16.0297 13.5088 15.1997L15.4788 13.2297L18.6888 10.0197C19.3588 9.33969 18.8788 8.17969 17.9188 8.17969Z"
+                        fill="#fff" />
+                </svg>
+            </div>
+
+            <div x-show="open" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform -translate-y-2"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-2" class="flex flex-col gap-3 pb-5 px-4">
                 @isset($tasks['en progreso'])
                     @foreach ($tasks['en progreso'] as $task)
                         <x-task-card :task="$task" />
@@ -65,10 +93,24 @@
             </div>
         </div>
 
-        <div class="flex flex-col py-5 px-4 border-2 border-dashed rounded-xl card__done">
-            <span class="w-fit bg-green-600 px-2 py-1 rounded-lg mb-6">Completada</span>
+        <div x-data="{ open: true }" class="flex flex-col border-2 border-dashed rounded-xl card__done">
+            <div @click="if(window.innerWidth < 1024) open = !open" class="flex items-center justify-between py-5 px-4 cursor-pointer lg:cursor-default">
+                <span class="w-fit bg-green-600 px-2 py-1 rounded-lg">Completada</span>
 
-            <div class="flex flex-col gap-3">
+                <svg :class="{'rotate-180' : open }" class="flex lg:hidden transition" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M17.9188 8.17969H11.6888H6.07877C5.11877 8.17969 4.63877 9.33969 5.31877 10.0197L10.4988 15.1997C11.3288 16.0297 12.6788 16.0297 13.5088 15.1997L15.4788 13.2297L18.6888 10.0197C19.3588 9.33969 18.8788 8.17969 17.9188 8.17969Z"
+                        fill="#fff" />
+                </svg>
+            </div>
+
+            <div x-show="open" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform -translate-y-2"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-2" class="flex flex-col gap-3 pb-5 px-4">
                 @isset($tasks['completada'])
                     @foreach ($tasks['completada'] as $task)
                         <x-task-card :task="$task" />
@@ -126,7 +168,7 @@
                     <div class="mt-6">
                         <x-input-label for="due_date" value="Titulo" />
                         <x-text-input id="due_date" name="due_date" type="date" class="mt-2 block w-full" dark
-                            placeholder="Implementar diseño..." required  x-bind:value="selected?.due_date" />
+                            placeholder="Implementar diseño..." required x-bind:value="selected?.due_date" />
 
                         <x-input-error :messages="$errors->get('due_date')" class="mt-2" />
                     </div>

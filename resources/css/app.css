@@ -70,7 +70,7 @@
   }
 }
 
-.sticky-navigation{
+.sticky-navigation {
   position: sticky;
   top: 12px;
   height: calc(100vh - 24px);
@@ -78,18 +78,27 @@
 
 .layout-wrapper {
   display: grid;
-  grid-template-columns: minmax(0, 250px) minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr);
 }
 
 .card__pending {
   background-color: #FF565910;
   border-color: #FF565960;
 }
+
 .card__inprogress {
   background-color: #FFCC0010;
   border-color: #FFCC0060;
 }
+
 .card__done {
   background-color: #42C83C10;
   border-color: #42C83C60;
+}
+
+
+@media screen and (max-width: 639px) {
+  .layout-wrapper {
+    grid-template-columns: 1fr;
+  }
 }
