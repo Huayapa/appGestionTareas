@@ -4,14 +4,14 @@
 
 @php
     $borderClass = null;
-    if ($task?->getDueStatus() === 'Vencido') {
-        $borderClass = 'border-red-500';
+    if ($task?->getDueStatus() == 'Vencido') {
+        $borderClass = 'border border-red-500';
     }
 @endphp
 
 {{-- Card --}}
 <div
-    class="p-5 pt-4 pb-2 bg-secondary rounded-2xl flex flex-col gap-4 relative border border-transparent {{ $borderClass }}">
+    class="p-5 pt-4 pb-2 bg-secondary rounded-2xl flex flex-col gap-4 relative {{ $borderClass }}">
     {{-- Options --}}
     <div class="absolute top-4 right-4">
         <x-dropdown>
@@ -66,8 +66,8 @@
     </div>
 
     {{-- Author --}}
-    <span class="flex items-center justify-center bg-primary rounded-full aspect-square p-1 text-dark text-sm w-[30px]" style="background: {{ Auth::user()->getUserAKA()['color'] }}">
-        {{ Auth::user()->getUserAKA()['aka'] }}
+    <span class="flex items-center justify-center bg-primary rounded-full aspect-square p-1 text-dark text-sm w-[30px]" style="background: {{ $task?->user->getUserAKA()['color'] }}">
+        {{ $task?->user->getUserAKA()['aka'] }}
     </span>
 
     {{-- Bottom --}}
