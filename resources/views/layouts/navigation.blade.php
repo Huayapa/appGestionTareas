@@ -15,7 +15,7 @@
                     <div class="w-10 aspect-square xl:w-8">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
-                                fill="#42C83C" stroke="#42C83C" stroke-width="1.5" stroke-linecap="round"
+                                fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round" />
                             <path d="M12.37 8.87988H17.62" stroke="#343434" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round" />
@@ -29,6 +29,21 @@
                     </div>
                     <span class="hidden xl:block">
                         Tareas
+                    </span>
+                </x-nav-link>
+
+                <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                    <svg width="35" height="35" viewBox="0 0 24 25" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 10.6665C14.2091 10.6665 16 8.87564 16 6.6665C16 4.45736 14.2091 2.6665 12 2.6665C9.79086 2.6665 8 4.45736 8 6.6665C8 8.87564 9.79086 10.6665 12 10.6665Z"
+                            fill="currentColor" />
+                        <path
+                            d="M20 18.1665C20 20.6515 20 22.6665 12 22.6665C4 22.6665 4 20.6515 4 18.1665C4 15.6815 7.582 13.6665 12 13.6665C16.418 13.6665 20 15.6815 20 18.1665Z"
+                            fill="currentColor" />
+                    </svg>
+                    <span class="hidden xl:block">
+                        Perfil
                     </span>
                 </x-nav-link>
             </div>

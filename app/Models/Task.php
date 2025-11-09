@@ -21,13 +21,6 @@ class Task extends Model
         return $this->belongsTo(User::class, 'user_assigned', 'id');
     }
 
-    public function getUserAKA() : ?string
-    {
-        $aka = collect(explode(' ', $this->user->name))->take(2)->map(fn($word) => strtoupper($word[0]))->implode('');
-
-        return $aka;
-    }
-
     public function isDueSoon(): bool
     {
         if (!$this->due_date) {

@@ -58,7 +58,7 @@
     </div>
 
     {{-- Content --}}
-    <div>
+    <div class="pr-6">
         <h3 class="text-lg mb-3">{{ $task?->title }}</h3>
         <p class="text-sm opacity-70">
             {{ $task?->description }}
@@ -66,8 +66,8 @@
     </div>
 
     {{-- Author --}}
-    <span class="flex items-center justify-center bg-primary rounded-full aspect-square p-1 text-dark text-sm w-[30px]">
-        {{ $task?->getUserAKA() }}
+    <span class="flex items-center justify-center bg-primary rounded-full aspect-square p-1 text-dark text-sm w-[30px]" style="background: {{ Auth::user()->getUserAKA()['color'] }}">
+        {{ Auth::user()->getUserAKA()['aka'] }}
     </span>
 
     {{-- Bottom --}}

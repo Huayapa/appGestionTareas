@@ -18,7 +18,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen layout-wrapper bg-secondary text-light gap-8 p-3 pb-20 sm:pb-3">
+    <div class="min-h-screen layout-wrapper bg-secondary text-light gap-8 p-3 pb-28 sm:pb-3">
         @include('layouts.navigation')
 
 

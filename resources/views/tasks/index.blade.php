@@ -5,8 +5,8 @@
         <div class="flex justify-end mb-12">
             <x-dropdown>
                 <x-slot name="trigger">
-                    <button class="flex bg-primary rounded-full aspect-square p-2 text-dark">
-                        {{ collect(explode(' ', Auth::user()->name))->take(2)->map(fn($word) => strtoupper($word[0]))->implode('') }}
+                    <button class="flex bg-primary rounded-full aspect-square p-2 text-dark" style="background: {{ Auth::user()->getUserAKA()['color'] }}">
+                        {{ Auth::user()->getUserAKA()['aka'] }}
                     </button>
                 </x-slot>
 
@@ -22,7 +22,7 @@
                         <x-dropdown-link :href="route('logout')"
                             onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                            {{ __('Log Out') }}
+                            Cerrar Sesión
                         </x-dropdown-link>
                     </form>
                 </x-slot>
@@ -149,7 +149,7 @@
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                 </div>
 
-                <div class="grid grid-cols-2 gap-6">
+                <div class="grid sm:grid-cols-2 sm:gap-6">
                     {{-- Status --}}
                     <div class="mt-6">
                         <x-input-label for="status" value="Estado" />
@@ -174,12 +174,12 @@
                     </div>
                 </div>
 
-                <div class="mt-6 flex justify-end">
+                <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-end">
                     <x-secondary-button x-on:click="$dispatch('close')">
                         Cancelar
                     </x-secondary-button>
 
-                    <x-primary-button class="ms-3">
+                    <x-primary-button class="-order-1 sm:order-1">
                         Actualizar Tarea
                     </x-primary-button>
                 </div>
@@ -239,7 +239,7 @@
                 <x-input-error :messages="$errors->get('description')" class="mt-2" />
             </div>
 
-            <div class="grid grid-cols-2 gap-6">
+            <div class="grid sm:grid-cols-2 sm:gap-6">
                 {{-- Status --}}
                 <div class="mt-6">
                     <x-input-label for="status" value="Estado" />
@@ -264,12 +264,12 @@
                 </div>
             </div>
 
-            <div class="mt-6 flex justify-end">
+            <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-end">
                 <x-secondary-button x-on:click="$dispatch('close')">
                     Cancelar
                 </x-secondary-button>
 
-                <x-primary-button class="ms-3">
+                <x-primary-button class="-order-1 sm:order-1">
                     Crear Tarea
                 </x-primary-button>
             </div>
