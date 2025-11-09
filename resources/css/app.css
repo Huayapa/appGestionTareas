@@ -1,3 +1,104 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Variables personalizadas */
+@layer base {
+  :root {
+    /* --color-primary: #42C83C; */
+    --color-primary: #42C83C;
+    --color-secondary: #1C1B1B;
+    --color-tertiary: #343434;
+    --color-dark: #0D0C0C;
+    --color-dark-30: #0D0C0C30;
+    --color-light: #f2f2f2;
+  }
+}
+
+.radial-login-bg {
+  background: radial-gradient(circle at center,
+      var(--color-tertiary),
+      var(--color-secondary) 30%,
+      var(--color-dark) 80%);
+}
+
+.animate-beat-slow {
+  animation: beat-slow 10s infinite ease;
+}
+
+.animate-beat {
+  animation: beat 7s infinite linear;
+}
+
+.animate-beat-reverse {
+  animation: beat-reverse 7s infinite linear;
+}
+
+@keyframes beat-slow {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes beat {
+
+  0%,
+  100% {
+    transform: scale(.5);
+  }
+
+  50% {
+    transform: scale(1.3);
+  }
+}
+
+@keyframes beat-reverse {
+
+  0%,
+  100% {
+    transform: scale(1.2);
+  }
+
+  50% {
+    transform: scale(.5);
+  }
+}
+
+.sticky-navigation {
+  position: sticky;
+  top: 12px;
+  height: calc(100vh - 24px);
+}
+
+.layout-wrapper {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.card__pending {
+  background-color: #FF565910;
+  border-color: #FF565960;
+}
+
+.card__inprogress {
+  background-color: #FFCC0010;
+  border-color: #FFCC0060;
+}
+
+.card__done {
+  background-color: #42C83C10;
+  border-color: #42C83C60;
+}
+
+
+@media screen and (max-width: 639px) {
+  .layout-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
