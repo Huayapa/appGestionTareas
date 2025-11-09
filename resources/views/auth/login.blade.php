@@ -64,6 +64,20 @@
                         </a>
                     </span>
 
+                <!-- BOTONES DE LOGIN SOCIAL AÑADIDOS -->
+                <div class="flex flex-col gap-3 mt-2">
+                    <a href="{{ url('/auth/google') }}"
+                        class="w-full flex items-center justify-center gap-2 border border-gray-300 rounded-2xl h-[50px] bg-white text-gray-700 hover:bg-gray-200 transition font-medium">
+                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
+                        <span>Continuar con Google</span>
+                    </a>
+
+                    <a href="{{ url('/auth/github') }}"
+                        class="w-full flex items-center justify-center gap-2 border border-gray-300 rounded-2xl h-[50px] bg-white text-gray-700 hover:bg-gray-200 transition font-medium">
+                        <img src="https://www.svgrepo.com/show/512317/github-142.svg" class="w-5 h-5" alt="GitHub">
+                        <span>Continuar con GitHub</span>
+                    </a>
+                </div>
 
                     <x-primary-button class="w-full h-[60px] rounded-2xl">
                         Iniciar sesión

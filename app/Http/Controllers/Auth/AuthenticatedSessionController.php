@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -71,7 +72,7 @@ class AuthenticatedSessionController extends Controller
 
             Auth::login($user, true);
 
-            return redirect('/dashboard');
+            return redirect('/tasks');
         } catch (\Exception $e) {
             return redirect('/login')->withErrors(['social_errors' => 'Error iniciando sesión con Google $e']);
         }
@@ -101,7 +102,7 @@ class AuthenticatedSessionController extends Controller
 
             Auth::login($user, true);
 
-            return redirect('/dashboard');
+            return redirect('/tasks');
         } catch (\Exception $e) {
             return redirect('/login')->withErrors(['social_errors' => 'Error iniciando sesión con GitHub']);
         }
