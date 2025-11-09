@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
 
 Route::get('/', function () {
     return redirect('login');
@@ -24,4 +26,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/tasks', [TaskController::class, 'destroy'])->name('tasks.destroy');
 });
 
-require __DIR__.'/auth.php';
+
+Route::get('/auth/google', [AuthenticatedSessionController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('/auth/google/callback', [AuthenticatedSessionController::class, 'handleGoogleCallback']);
+
+Route::get('/auth/github', [AuthenticatedSessionController::class, 'redirectToGithub'])->name('auth.github');
+Route::get('/auth/github/callback', [AuthenticatedSessionController::class, 'handleGithubCallback']);
+
+require __DIR__ . '/auth.php';
